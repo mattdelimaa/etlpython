@@ -1,29 +1,49 @@
+#importa os pacotes necessários
+
+#pacotes para trabalhar com o sheets
 from google.colab import auth
 import gspread
+
+#Pandas é o melhor pacote de Python para manipulação de dados
 import pandas as pd
+
+#Pacote para trabalhar com arrays
 import numpy as np
+
+#Pacote para listar arquivos de diretório
 import glob
+
+#pacote para manipulação de data e horas
 import datetime
 
-
+#Importa as credencias para conectar ao Sheets
 auth.authenticate_user()
 from oauth2client.client import GoogleCredentials
 
 gc = gspread.authorize(GoogleCredentials.get_application_default())
 
-worksheet = gc.open('Formulário de Atendimento Unificado (respostas)').sheet1
+#Não há necessidade de copiar a URL da planilha aqui, basta inserir o nome do arquivo do Sheets
+worksheet = gc.open('your Google Sheet').sheet1
 
-#a fórmula get_all_values retorna uma lista de linhas e colunas
+#a fórmula get_all_values retorna as linhas e colunas
 columns = worksheet.get_all_records()
 rows = worksheet.get_all_values()
 ws = pd.DataFrame.from_records(columns)
 
+#traz os títulos das colunas
 ws.head()
-ws['Equipamento'].unique()
-ws = ws[~(ws['Equipamento'] == ' ')]
-ws['Equipamento'].unique()
 
-for equip in ws['Equipamento'].unique():
-  print(equip)
-  ws_equip = ws[ws['Equipamento'] == equip]
-  ws_equip.to_csv('/content/drive/My Drive/Gestão da Informação/Monitoramento Rede de Serviços/M&A - Rede de Direitos Humanos/Bases/' + equip + '.csv')
+#traz os valores únicos
+ws['váriavel que deseja retornar os valores únicos'].unique()
+
+# Exclui os valores em branco
+ws = ws[~(ws['váriavel que deseja retornar os valores únicos'] == ' ')]
+
+#retorna novo resultado de valores únicos
+ws['váriavel que deseja retornar os valores únicos'].unique()
+
+#Função para filtrar os valores desejados e separar em planilhas separadas. Neste caso vamos salvar em CSV
+for suafunção in ws['váriavel que deseja retornar os valores únicos'].unique():
+  print(suafunção)
+  ws_equip = ws[ws['váriavel que deseja retornar os valores únicos'] == equip]
+  ws_equip.to_csv('caminho do local onde será salvo' + sua função + '.csv')
