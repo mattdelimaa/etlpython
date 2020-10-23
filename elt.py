@@ -47,3 +47,6 @@ for suafunção in ws['váriavel que deseja retornar os valores únicos'].unique
   print(suafunção)
   ws_equip = ws[ws['váriavel que deseja retornar os valores únicos'] == equip]
   ws_equip.to_csv('caminho do local onde será salvo' + sua função + '.csv')
+
+  
+  
